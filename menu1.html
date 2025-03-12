@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú 1 - Consulta API</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 20px;
+            background-color: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #000000);
+        }
+        input, button {
+            padding: 10px; 
+            width: 80%; 
+            max-width: 300px; 
+            margin: 10px 5px;
+            border: 1px solid var(--tg-theme-hint-color, #ccc);
+        }
+        button {
+            background: var(--tg-theme-button-color, #007BFF); 
+            color: var(--tg-theme-button-text-color, #ffffff); 
+            border: none; 
+            cursor: pointer;
+        }
+        button:hover { background: #0056b3; }
+        #resultado { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Consulta API</h1>
+    <p>Ingresá un valor y consultá la API.</p>
+
+    <input type="text" id="inputValor" placeholder="Escribí un valor">
+    <button onclick="consultarAPI()">Consultar</button>
+    <div id="resultado">Esperando consulta...</div>
+
+    <button onclick="window.location.href='index.html'">Volver a inicio</button>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+
+        function consultarAPI() {
+            let valor = document.getElementById("inputValor").value;
+            if (!valor) {
+                alert("Por favor, ingresá un valor.");
+                return;
+            }
+
+            let url = `https://jsonplaceholder.typicode.com/posts/${valor}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("resultado").innerText = 
+                        `Título: ${data.title || "Sin datos"}\nContenido: ${data.body || "Sin datos"}`;
+                })
+                .catch(error => {
+                    document.getElementById("resultado").innerText = "Error en la consulta.";
+                    console.error("Error en la API:", error);
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini App Telegram</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            padding: 20px; 
+            background-color: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #000000);
+        }
+        nav { margin: 10px 0; }
+        nav a { 
+            display: block; 
+            padding: 10px; 
+            margin: 10px auto; 
+            width: 200px; 
+            text-decoration: none; 
+            background: var(--tg-theme-button-color, #007BFF); 
+            color: var(--tg-theme-button-text-color, #ffffff); 
+            border-radius: 5px;
+        }
+        nav a:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Bienvenido a la Mini App</h1>
+    <p id="user-info">Cargando usuario...</p>
+
+    <nav>
+        <a href="menu1.html">Menú 1</a>
+        <a href="menu2.html">Menú 2</a>
+    </nav>
+
+    <script>
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+        document.addEventListener("DOMContentLoaded", function() {
+            let user = tg.initDataUnsafe.user;
+            document.getElementById("user-info").innerText = user ? `Hola, ${user.first_name}!` : "No se pudo obtener el usuario.";
+        });
+    </script>
+</body>
+</html>
