@@ -37,21 +37,24 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        if (typeof window.Telegram === "undefined") {
+            console.error("⚠️ Error: Telegram WebApp no está disponible.");
+            document.body.innerHTML = "<h1 style='color: red;'>⚠️ Error: Esta WebApp solo funciona dentro de Telegram.</h1>";
+            return;
+        }
+
         let tg = window.Telegram.WebApp;
-        if (tg) {
-            tg.expand(); // Expande la WebApp a pantalla completa
-            console.log("Datos de Telegram WebApp:", tg);
+        tg.expand();
 
-            let user = tg.initDataUnsafe?.user;
-            console.log("Datos del usuario:", user);
+        console.log("Datos de Telegram WebApp:", tg);
 
-            if (user) {
-                document.getElementById("user-info").innerText = `Hola, ${user.first_name}!`;
-            } else {
-                document.getElementById("user-info").innerText = "❌ No se pudo obtener el usuario.";
-            }
+        let user = tg.initDataUnsafe?.user;
+        console.log("Datos del usuario:", user);
+
+        if (user) {
+            document.getElementById("user-info").innerText = `Hola, ${user.first_name}!`;
         } else {
-            document.body.innerHTML = "<h1 style='color: red;'>⚠️ Error: Telegram WebApp no está disponible.</h1>";
+            document.getElementById("user-info").innerText = "❌ No se pudo obtener el usuario.";
         }
     });
 </script>
