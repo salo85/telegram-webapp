@@ -35,13 +35,20 @@
         <a href="menu2.html">Menú 2</a>
     </nav>
 
-    <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand();
-        document.addEventListener("DOMContentLoaded", function() {
-            let user = tg.initDataUnsafe.user;
-            document.getElementById("user-info").innerText = user ? `Hola, ${user.first_name}!` : "No se pudo obtener el usuario.";
-        });
-    </script>
+<script>
+    let tg = window.Telegram.WebApp;
+    tg.expand();
+
+    document.addEventListener("DOMContentLoaded", function() {
+        let user = tg.initDataUnsafe?.user; // Verifica si existe
+        console.log("Datos del usuario:", tg.initDataUnsafe); // Muestra en la consola
+
+        if (user) {
+            document.getElementById("user-info").innerText = `Hola, ${user.first_name}!`;
+        } else {
+            document.getElementById("user-info").innerText = "No se pudo obtener el usuario.";
+        }
+    });
+</script>
 </body>
 </html>
