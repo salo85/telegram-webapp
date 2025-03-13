@@ -37,6 +37,12 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        // Verificar si la Mini App se abre dentro de Telegram
+        if (window.Telegram === undefined || window.Telegram.WebApp === undefined) {
+            document.body.innerHTML = "<h1 style='color: red; text-align: center;'>⚠ Acceso no permitido. Solo disponible en Telegram.</h1>";
+            return; // Detener la ejecución del código
+        }
+
         function getQueryParam(param) {
             let params = new URLSearchParams(window.location.search);
             return params.get(param);
