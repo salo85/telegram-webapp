@@ -38,7 +38,16 @@
     <div id="resultado">Esperando consulta...</div>
 
     <button onclick="window.location.href='index.html'">Volver a inicio</button>
-
+    <script>
+        function volverAInicio() {
+            let userId = new URLSearchParams(window.location.search).get("tgWebAppData");
+            if (userId) {
+                window.location.href = `index.html?tgWebAppData=${userId}`;
+            } else {
+                window.location.href = "index.html";
+            }
+        }
+    </script>
     <script>
         let tg = window.Telegram.WebApp;
         tg.expand();
