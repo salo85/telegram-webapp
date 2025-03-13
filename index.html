@@ -39,7 +39,8 @@
     document.addEventListener("DOMContentLoaded", function() {
         // Verificar si la Mini App se abre dentro de Telegram
         if (window.Telegram === undefined || window.Telegram.WebApp === undefined) {
-            document.body.innerHTML = "<h1 style='color: red; text-align: center;'>⚠ Acceso no permitido. Solo disponible en Telegram.</h1>";
+            window.location.href = "https://t.me/NOMBRE_DE_TU_BOT";
+            //document.body.innerHTML = "<h1 style='color: red; text-align: center;'>⚠ Acceso no permitido. Solo disponible en Telegram.</h1>";
             return; // Detener la ejecución del código
         }
 
