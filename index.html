@@ -45,11 +45,24 @@
         let userId = getQueryParam("tgWebAppData");
 
         if (userId) {
+            // Guardar el userId en el localStorage
+            localStorage.setItem("tgWebAppData", userId);
             document.getElementById("user-info").innerText = `Hola, usuario ${userId}!`;
         } else {
-            document.body.innerHTML = "<h1 style='color: red;'>❌ No se pudo obtener el usuario.</h1>";
+            // Intentar recuperar el userId del localStorage
+            userId = localStorage.getItem("tgWebAppData");
+            if (userId) {
+                document.getElementById("user-info").innerText = `Hola, usuario ${userId}!`;
+            } else {
+                document.body.innerHTML = "<h1 style='color: red;'>❌ No se pudo obtener el usuario.</h1>";
+            }
         }
     });
 </script>
 </body>
 </html>
+
+
+
+
+
